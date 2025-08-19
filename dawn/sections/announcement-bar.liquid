@@ -1,17 +1,33 @@
+{% comment %} iterates over each block in the section's blocks collection {% endcomment %}
 {%- for block in section.blocks -%}
   {%- case block.type -%}
     {%- when 'announcement' -%}
-      <div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
+      <div
+        {% comment %} block er setting e dropdown select input type theke j option select kora hobe, sheioption er value niye e.g: color-background-2 class toiri hobe. R style likha thakche css e. {% endcomment %}
+        class="announcement-bar color-{{ block.settings.color_scheme }} gradient"
+        role="region"
+        {% comment %} sections is not an object or variable. Instead, it is part of a translation key string. Shopify uses translation files (locales) to store text in different languages. The key 'sections.header.announcement' refers to a specific entry in your locale files (like en.default.json). The | t filter tells Shopify to look up this key and output the translated text. {% endcomment %}
+        aria-label="{{ 'sections.header.announcement' | t }}"
+
+        {% comment %} When you use {{ block.shopify_attributes }} inside a block's HTML tag, Shopify automatically adds various data attributes (like data-block-id, etc.) that help the theme editor identify and interact with that specific block. These attributes are used by the Shopify theme editor to enable live editing, drag-and-drop, and other customization features. These attributes are not visible to regular visitors but are essential for the theme customization experience in the Shopify admin. {% endcomment %}
+        {{ block.shopify_attributes }}
+      >
+        {% comment %} if text is not empty in the block {% endcomment %}
         {%- if block.settings.text != blank -%}
+          {% comment %} if block has link, inject anchor tag {% endcomment %}
           {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
+            <a
+              href="{{ block.settings.link }}"
+              class="announcement-bar__link link link--text focus-inset animate-arrow"
+            >
           {%- endif -%}
-              <p class="announcement-bar__message h5">
-                {{ block.settings.text | escape }}
-                {%- if block.settings.link != blank -%}
-                  {% render 'icon-arrow' %}
-                {%- endif -%}
-              </p>
+          {% comment %} show block text content and arrow if link exists {% endcomment %}
+          <p class="announcement-bar__message h5">
+            {{ block.settings.text | escape }}
+            {%- if block.settings.link != blank -%}
+              {% render 'icon-arrow' %}
+            {%- endif -%}
+          </p>
           {%- if block.settings.link != blank -%}
             </a>
           {%- endif -%}
@@ -38,6 +54,8 @@
         {
           "type": "select",
           "id": "color_scheme",
+          "default": "accent-1",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label",
           "options": [
             {
               "value": "background-1",
@@ -59,9 +77,7 @@
               "value": "accent-2",
               "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.options__5.label"
             }
-          ],
-          "default": "accent-1",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.color_scheme.label"
+          ]
         },
         {
           "type": "url",
@@ -80,3 +96,12 @@
   }
 }
 {% endschema %}
+
+this section can have up to 12 announcement blocks. Each block is of type "announcement" and includes several
+customizable settings: "text": the merchant can enter the announcement message. It has a default value of "Welcome to
+our store" and a translatable label. "color_scheme": A dropdown (select) allowing the merchant to choose from several
+color schemes (like background-1, background-2, inverse, accent-1, accent-2). Each option has a value and a translatable
+label. The default is "accent-1". "link": A URL field where the merchant can provide a link for the announcement, making
+the message clickable. The "default" property ensures that when the section is first added, it starts with one
+announcement block by default. All labels use translation keys, so the theme can support multiple languages. This schema
+structure enables flexible, user-friendly customization of the announcement bar directly from the Shopify admin.
