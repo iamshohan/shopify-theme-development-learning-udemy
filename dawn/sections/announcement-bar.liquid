@@ -97,11 +97,15 @@
 }
 {% endschema %}
 
-this section can have up to 12 announcement blocks. Each block is of type "announcement" and includes several
-customizable settings: "text": the merchant can enter the announcement message. It has a default value of "Welcome to
-our store" and a translatable label. "color_scheme": A dropdown (select) allowing the merchant to choose from several
-color schemes (like background-1, background-2, inverse, accent-1, accent-2). Each option has a value and a translatable
-label. The default is "accent-1". "link": A URL field where the merchant can provide a link for the announcement, making
-the message clickable. The "default" property ensures that when the section is first added, it starts with one
-announcement block by default. All labels use translation keys, so the theme can support multiple languages. This schema
-structure enables flexible, user-friendly customization of the announcement bar directly from the Shopify admin.
+{% comment %}
+  this section can have up to 12 announcement blocks. Each block is of type "announcement" and includes several
+  customizable settings: "text": the merchant can enter the announcement message. It has a default value of "Welcome to our store" and a translatable label.
+  "color_scheme": A dropdown (select) allowing the merchant to choose from several color schemes (like background-1, background-2, inverse, accent-1, accent-2). Each option has a value and a translatable label. The default is "accent-1".
+  "link": A URL field where the merchant can provide a link for the announcement, making
+  the message clickable.
+
+  The "default" property ensures that when the section is first added, it starts with one
+  announcement block by default.
+
+  All labels use translation keys, so the theme can support multiple languages.
+{% endcomment %}
