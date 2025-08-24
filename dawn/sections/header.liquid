@@ -1,3 +1,7 @@
+{% comment %} This line of code loads a CSS stylesheet called component-list-menu.css from the Shopify assets. The href attribute uses Shopify's asset_url filter to generate the correct URL for the CSS file.
+
+The media="print" attribute initially tells the browser to only apply this stylesheet when printing the page, so it doesn't block the initial rendering of the page for screen users. 
+However, the onload="this.media='all'" JavaScript event handler changes the media attribute to "all" once the stylesheet has finished loading. So, with media="print" the stylesheet is only applied during printing, but once the browser loads the CSS file asynchronously, preventing it from blocking the rendering of the page, and then applies the styles for all media types after the file is loaded. This helps improve page load speed while still ensuring the styles are eventually applied. {% endcomment %}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
