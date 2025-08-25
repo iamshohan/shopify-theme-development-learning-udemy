@@ -12,6 +12,7 @@ However, the onload="this.media='all'" JavaScript event handler changes the medi
   <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{% comment %} This code ensures that the component-list-menu.css stylesheet is loaded even if the user's browser has JavaScript disabled. The <noscript> tag is used to provide fallback content for users who do not have JavaScript enabled. Inside the tag, the Liquid expression {{ 'component-list-menu.css' | asset_url | stylesheet_tag }} generates a standard <link rel="stylesheet"> tag pointing to the CSS file using Shopify's asset_url and stylesheet_tag filters. Stylesheets in this theme are loaded asynchronously using JavaScript (with the media="print" and onload technique). However, if JavaScript is disabled, those styles would not be applied. By including this fallback inside <noscript>, the theme ensures that essential styles are still loaded and the site remains usable for all visitors, regardless of their browser settings. {% endcomment %}
 <noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
