@@ -19,6 +19,7 @@ However, the onload="this.media='all'" JavaScript event handler changes the medi
 <noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}</noscript>
 
+{% comment %}Sometimes, critical CSS is inlined in the liquid template to ensure the header renders correctly before external CSS files finish loading. This can improve perceived performance and prevent layout shifts.{% endcomment %}
 <style>
   header-drawer {
     justify-self: start;
@@ -71,6 +72,7 @@ However, the onload="this.media='all'" JavaScript event handler changes the medi
   }
 </style>
 
+{% comment %} Each line includes a JavaScript file from the Shopify assets folder. The src attribute uses the asset_url filter to generate the correct URL for the script file. The defer="defer" attribute tells the browser to download the script in the background and execute it only after the HTML document has been fully parsed. This helps improve page load performance by not blocking the rendering of the page. {% endcomment %}
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
